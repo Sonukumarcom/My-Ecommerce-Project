@@ -1,3 +1,4 @@
+
 package com.store.ecommerce.config;
 
 import com.store.ecommerce.security.AuthEntryPointJwt;
@@ -54,37 +55,34 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(12);
     }
 
-  @Bean
-public DaoAuthenticationProvider authenticationProvider() {
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider =
+                new DaoAuthenticationProvider(userDetailsService);
 
-DaoAuthenticationProvider authProvider =
-        new DaoAuthenticationProvider(userDetailsService);
-
-authProvider.setPasswordEncoder(passwordEncoder());
-
-    return authProvider;
-}
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authConfig) throws Exception {
-
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+        configuration.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:5173",
+                        "http://localhost:5174",
+                        "http://localhost:3000",
+                        "https://my-ecommerce-project-h4cx.vercel.app"
+                )
+        );
 
-        configuration.setAllowedOriginPatterns(
-        Arrays.asList(
-                "http://localhost:5173",
-                "http://localhost:5174",
-                "http://localhost:3000"
-        )
-);
         configuration.setAllowedMethods(
                 Arrays.asList(
                         "GET",
@@ -116,10 +114,7 @@ authProvider.setPasswordEncoder(passwordEncoder());
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
@@ -130,15 +125,11 @@ authProvider.setPasswordEncoder(passwordEncoder());
 
         http
                 .cors(cors ->
-                        cors.configurationSource(
-                                corsConfigurationSource()
-                        )
+                        cors.configurationSource(corsConfigurationSource())
                 )
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception ->
-                        exception.authenticationEntryPoint(
-                                unauthorizedHandler
-                        )
+                        exception.authenticationEntryPoint(unauthorizedHandler)
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
@@ -147,19 +138,16 @@ authProvider.setPasswordEncoder(passwordEncoder());
                 )
                 .authorizeHttpRequests(auth -> auth
 
-                        // Public Auth Endpoints
                         .requestMatchers(
                                 "/api/v1/auth/**"
                         ).permitAll()
 
-                        // Swagger & OpenAPI
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
 
-                        // Public Catalog & Product Browsing
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/v1/categories/**"
@@ -175,22 +163,18 @@ authProvider.setPasswordEncoder(passwordEncoder());
                                 "/api/v1/reviews/**"
                         ).permitAll()
 
-                        // Public / Guest Cart Access
                         .requestMatchers(
                                 "/api/v1/cart/guest/**"
                         ).permitAll()
 
-                        // Webhook integrations
                         .requestMatchers(
                                 "/api/v1/payments/webhook/**"
                         ).permitAll()
 
-                        // Admin Endpoints
                         .requestMatchers(
                                 "/api/v1/admin/**"
                         ).hasRole("ADMIN")
 
-                        // Customer / Authenticated Endpoints
                         .requestMatchers(
                                 "/api/v1/cart/**"
                         ).authenticated()
@@ -207,13 +191,10 @@ authProvider.setPasswordEncoder(passwordEncoder());
                                 "/api/v1/reviews/**"
                         ).authenticated()
 
-                        // Any other request
                         .anyRequest().authenticated()
                 );
 
-        http.authenticationProvider(
-                authenticationProvider()
-        );
+        http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(
                 authTokenFilter,
