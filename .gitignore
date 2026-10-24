@@ -1,0 +1,35 @@
+# ========================
+# IDE and OS files
+# ========================
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ========================
+# Java / Maven / Spring Boot
+# ========================
+**/target/
+*.class
+*.log
+
+# ========================
+# React / Node.js / Vite
+# ========================
+**/node_modules/
+**/dist/
+**/.vite/
+
+# ========================
+# Environment secrets
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Build and temporary files
+# ========================
+*.tmp
+*.swp
