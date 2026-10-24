@@ -38,13 +38,6 @@ interface CategoryApiResponse {
   data: Category[];
 }
 
-interface ProductsApiResponse {
-  success: boolean;
-  message?: string;
-  data: {
-    content: Product[];
-  };
-}
 
 /**
  * Normalizes category names and slugs so that values such as
@@ -392,7 +385,7 @@ export const CatalogPage: React.FC = () => {
      REUSABLE CATEGORY FILTERS
   ========================= */
 
-  const renderCategoryButtons = (mobile = false) => (
+  const renderCategoryButtons = () => (
     <div className="space-y-1">
       <button
         type="button"
@@ -997,7 +990,9 @@ export const CatalogPage: React.FC = () => {
                 <label className="mb-3 block text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400">
                   Categories
                 </label>
-                {renderCategoryButtons(true)}
+              
+{renderCategoryButtons()}
+
               </div>
 
               <div>{renderPriceFilter()}</div>
