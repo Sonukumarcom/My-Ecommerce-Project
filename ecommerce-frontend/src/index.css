@@ -32,3 +32,307 @@ body {
     width: 0%;
   }
 }
+
+
+/* ===== AuraStore Animated Shopping UI ===== */
+
+@keyframes auraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auraFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes auraGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(99, 102, 241, 0.32);
+  }
+}
+
+@keyframes auraShimmer {
+  from { background-position: 200% center; }
+  to { background-position: -200% center; }
+}
+
+.aura-hero {
+  animation: auraFadeUp 0.8s ease-out both;
+}
+
+.aura-hero-image {
+  animation: auraFloat 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.aura-category-card {
+  isolation: isolate;
+  transform: perspective(1000px) translateY(0) rotateX(0);
+  transition:
+    transform 450ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 450ms ease;
+  will-change: transform;
+}
+
+.aura-category-card:hover {
+  transform: perspective(1000px) translateY(-9px) rotateX(2deg);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.22);
+}
+
+.aura-category-card img {
+  transition: transform 700ms cubic-bezier(.2,.8,.2,1);
+}
+
+.aura-category-card:hover img {
+  transform: scale(1.12);
+}
+
+.aura-promo {
+  animation: auraGlow 4s ease-in-out infinite;
+}
+
+.aura-promo-badge {
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    110deg,
+    rgba(255,255,255,.10) 25%,
+    rgba(255,255,255,.30) 45%,
+    rgba(255,255,255,.10) 65%
+  );
+  animation: auraShimmer 4s linear infinite;
+}
+
+.aura-feature-card {
+  transition:
+    transform 350ms ease,
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.aura-feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(30, 41, 59, .10);
+}
+
+.aura-feature-icon {
+  transition: transform 400ms ease;
+}
+
+.aura-feature-card:hover .aura-feature-icon {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+.aura-final-cta {
+  animation: auraGlow 5s ease-in-out infinite;
+}
+
+.aura-animated-button {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.aura-animated-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(79, 70, 229, .28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero,
+  .aura-hero-image,
+  .aura-promo,
+  .aura-promo-badge,
+  .aura-final-cta {
+    animation: none;
+  }
+
+  .aura-category-card,
+  .aura-category-card img,
+  .aura-feature-card,
+  .aura-feature-icon,
+  .aura-animated-button {
+    transition: none;
+  }
+}
+
+/* ========================================
+   AuraStore - Premium Animated UI
+======================================== */
+
+@keyframes auraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auraFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes auraGlow {
+  0%, 100% {
+    box-shadow: 0 10px 35px rgba(79, 70, 229, 0.12);
+  }
+  50% {
+    box-shadow: 0 10px 45px rgba(99, 102, 241, 0.3);
+  }
+}
+
+@keyframes auraShimmer {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes auraBadgeFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1deg);
+  }
+}
+
+.aura-hero {
+  animation: auraFadeUp 800ms ease-out both;
+}
+
+.aura-hero-image {
+  transform-style: preserve-3d;
+  animation: auraFloat 5s ease-in-out infinite;
+}
+
+.aura-floating-badge {
+  animation: auraBadgeFloat 4s ease-in-out infinite;
+}
+
+.aura-floating-badge-delay {
+  animation-delay: -2s;
+}
+
+.aura-glass-card {
+  transition:
+    transform 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease;
+}
+
+.aura-glass-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.aura-category-card {
+  isolation: isolate;
+  transform: perspective(1000px) translateY(0);
+  transition:
+    transform 450ms cubic-bezier(.2, .8, .2, 1),
+    box-shadow 450ms ease;
+  will-change: transform;
+}
+
+.aura-category-card:hover {
+  transform: perspective(1000px) translateY(-9px) rotateX(2deg);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.22);
+}
+
+.aura-category-card img {
+  transition: transform 700ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.aura-category-card:hover img {
+  transform: scale(1.12);
+}
+
+.aura-promo {
+  animation: auraGlow 4s ease-in-out infinite;
+}
+
+.aura-promo-badge {
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.10) 25%,
+    rgba(255, 255, 255, 0.30) 45%,
+    rgba(255, 255, 255, 0.10) 65%
+  );
+  animation: auraShimmer 4s linear infinite;
+}
+
+.aura-feature-card {
+  transition:
+    transform 350ms ease,
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.aura-feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(30, 41, 59, 0.10);
+}
+
+.aura-feature-icon {
+  transition: transform 400ms ease;
+}
+
+.aura-feature-card:hover .aura-feature-icon {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+.aura-final-cta {
+  animation: auraGlow 5s ease-in-out infinite;
+}
+
+.aura-animated-button {
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    background-color 250ms ease;
+}
+
+.aura-animated-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(79, 70, 229, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-hero,
+  .aura-hero-image,
+  .aura-floating-badge,
+  .aura-promo,
+  .aura-promo-badge,
+  .aura-final-cta {
+    animation: none;
+  }
+
+  .aura-category-card,
+  .aura-category-card img,
+  .aura-feature-card,
+  .aura-feature-icon,
+  .aura-animated-button,
+  .aura-glass-card {
+    transition: none;
+  }
+}
